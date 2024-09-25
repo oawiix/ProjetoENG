@@ -68,7 +68,7 @@
                 </h2>
                 <!-- Cargo -->
                 <% String modo=(String) session.getAttribute("tipo"); String modoText=modo.equals("1") ? "Administrador"
-                    : "Colaborador" ; %>
+                    : "Usuario" ; %>
                     <p>
                         <%= modoText %>
                     </p>
