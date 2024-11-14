@@ -47,7 +47,7 @@
                     <span class="message-count">0</span>
                     <h3>Mensagens</h3>
                 </a> -->
-                 <a href="produtos.jsp">
+                 <a href="pteste.jsp">
                     <span class="material-icons-sharp">
                         inventory
                     </span>
@@ -71,14 +71,14 @@
                     </span>
                     <h3>Config</h3>
                 </a> -->
-                    <% if(session.getAttribute("tipo").equals("1")) { %>
-                        <a href="addUser.jsp">
+                
+                     <!--   <a href="produtos.jsp">
                             <span class="material-icons-sharp">
                                 add
                             </span>
-                            <h3>Adicionar<br>Usu�rio</h3>
-                        </a>
-                        <% } %>
+                            <h3>Adicionar<br>Produto</h3>
+                        </a> -->
+                      
                             <a href="logout2" style="background-color: transparent; margin-top:12px" type="submit">
                                 <span class="material-icons-sharp">
                                     logout

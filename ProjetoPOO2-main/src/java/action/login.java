@@ -70,11 +70,12 @@ public class login extends HttpServlet {
                         session.setAttribute("usuario", usuario);
                         session.setAttribute("nome", rs.getString("nome"));
                         session.setAttribute("tipo", rs.getString("tipo"));
+                        session.setAttribute("id", rs.getInt("id"));
                         response.sendRedirect("dashboard.jsp");
                     }
                         // If the number of records found is greater than zero, store the user information in the session and redirect to dashboard.jsp.
                      else {
-                        response.sendRedirect("index.jsp?wt=1");
+                        response.sendRedirect("login.jsp?wt=1");
                         // Otherwise, redirect to indexw.jsp.
                     }
                 } catch (SQLException e) {

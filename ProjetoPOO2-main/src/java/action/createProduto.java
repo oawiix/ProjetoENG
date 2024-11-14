@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.lembrete;
-
-@WebServlet(urlPatterns = {"/addlembrete"})
-public class addLembrete extends HttpServlet {
+import model.produto;
+@WebServlet(urlPatterns = {"/createProduto"})
+public class createProduto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,27 +31,25 @@ public class addLembrete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
                 try {
-                    lembrete Reminder = new lembrete();
+                    produto produto = new produto();
 
                     // Obtém os valores enviados pelo formulário
                     String nome = request.getParameter("nome");
-                    String descricao = request.getParameter("descricao");
-                    String data = request.getParameter("data");
-                    String hora = request.getParameter("hora");
-                    int userid = Integer.parseInt(request.getParameter("uid"));
+                    String tipo = request.getParameter("tipo");
+                    Double price = Double.parseDouble(request.getParameter("price"));
+                    int userid = Integer.parseInt(request.getParameter("userid"));
 
-                    // Define os valores do usuario
-                    Reminder.setNome(nome);
-                    Reminder.setDescricao(descricao);
-                    Reminder.setData(data);
-                    Reminder.setHora(hora);
-                    Reminder.setUserId(userid);
+                    // Define os valores do pedido
+                    produto.setNome(nome);
+                    produto.setTipo(tipo);
+                    produto.setValor(price);
+                    produto.setUserId(userid); 
 
-                    // Salva o usuario
-                    Reminder.save();
+                    // Salva o pedido
+                    produto.save();
 
                     // Redireciona para a página de dashboard
-                    response.sendRedirect("dashboard.jsp");
+                    response.sendRedirect("pteste.jsp?confirm=1");
                 } catch (Exception e) {
                     // Handle the exception here
                     e.printStackTrace();

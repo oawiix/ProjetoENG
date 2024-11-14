@@ -7,7 +7,6 @@
 <% conBd conexao = new conBd();
     Connection conn = conexao.getConnection();
     Statement s = conn.createStatement();
-    int uid = (int)session.getAttribute("id");
    %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,21 +35,18 @@
             }
             int offset = (page2 - 1) * limit; // Calcula o offset
 
-            String countQuery = "SELECT COUNT(*) FROM pedidos WHERE active = 1 AND userid = ?";  // Query para contar o total de pedidos
+            String countQuery = "SELECT COUNT(*) FROM pedidos WHERE active = 1";  // Query para contar o total de pedidos
 
             if (pesquisaAtivo != null && !pesquisaAtivo.isEmpty()) {
                 countQuery += " AND cliente LIKE '%" + pesquisaAtivo + "%'"; // Adiciona a cláusula de pesquisa
             }
             PreparedStatement countStmt = conn.prepareStatement(countQuery); // Prepara a query
-            countStmt.setInt(1, uid); // Adiciona o id do usuário
             ResultSet countResult = countStmt.executeQuery(); // Executa a query
             countResult.next(); // Pega o resultado
             int totalRows = countResult.getInt(1); // Pega o total de pedidos
             int totalPages = (int) Math.ceil(totalRows / (double) limit); // Calcula o total de páginas
 
-            // PESQUISAR PEDIDOS
-
-            String selectQuery = "SELECT * FROM pedidos WHERE active = 1 AND userid = ?"; // Query para selecionar os pedidos
+            String selectQuery = "SELECT * FROM pedidos WHERE active = 1"; // Query para selecionar os pedidos
 
             if (pesquisaAtivo != null && !pesquisaAtivo.isEmpty()) {
                 selectQuery += " AND cliente LIKE '%" + pesquisaAtivo + "%'"; // Adiciona a cláusula de pesquisa
@@ -59,9 +55,8 @@
             selectQuery += " ORDER BY id DESC LIMIT ?, ?"; // Adiciona a cláusula de limite e offset
 
             PreparedStatement selectStmt = conn.prepareStatement(selectQuery); // Prepara a query
-            selectStmt.setInt(1, uid); // Adiciona o id do usuário
-            selectStmt.setInt(2, offset); // Adiciona o offset
-            selectStmt.setInt(3, limit); // Adiciona o limite
+            selectStmt.setInt(1, offset); // Adiciona o offset
+            selectStmt.setInt(2, limit); // Adiciona o limite
             ResultSet pedidosResult = selectStmt.executeQuery(); // Executa a query
         %>
         <style>
@@ -93,10 +88,7 @@
                             <h1> 
                                 <%
                                     double total = 0;  // Variável para armazenar o total 
-                                    String pedidosQuery = "SELECT valor FROM pedidos WHERE active = 2 AND userid = ?"; // Query para pegar o valor dos pedidos
-                                    PreparedStatement pedidosQueryDone = conn.prepareStatement(pedidosQuery); // Prepara a query
-                                    pedidosQueryDone.setInt(1, uid); // Adiciona o id do usuário
-                                    ResultSet pedidos = pedidosQueryDone.executeQuery(); // Executa a query
+                                    ResultSet pedidos = s.executeQuery("SELECT valor FROM pedidos WHERE active = 2");  // Query para pegar o valor dos pedidos
                                     while (pedidos.next()) {  // Loop para somar os valores
                                         total += pedidos.getDouble("valor"); // Soma os valores
                                     }
@@ -106,10 +98,7 @@
                             <span style="margin-left:10px;">
                                 <%
                                     double total2 = 0; // Variável para armazenar o total
-                                    String pedidosQuery2 = "SELECT valor FROM pedidos WHERE active = 1 AND userid = ?"; // Query para pegar o valor dos pedidos
-                                    PreparedStatement pedidosQueryDone2 = conn.prepareStatement(pedidosQuery2); // Prepara a query
-                                    pedidosQueryDone2.setInt(1, uid); // Adiciona o id do usuário
-                                    ResultSet pedidos2 = pedidosQueryDone2.executeQuery(); // Executa a query
+                                    ResultSet pedidos2 = s.executeQuery("SELECT valor FROM pedidos WHERE active = 1"); // Query para pegar o valor dos pedidos
                                     while (pedidos2.next()) { // Loop para somar os valores
                                         total2 += pedidos2.getDouble("valor"); // Soma os valores
                                     }
@@ -126,11 +115,8 @@
                             <h1>
                                 <%
                                     int total3 = 0; // Variável para armazenar o total
-                                    String concluidosQuery = "SELECT id FROM pedidos WHERE active = 2 AND userid = ?"; // Query para pegar os pedidos concluídos
-                                    PreparedStatement concluidosQueryDone = conn.prepareStatement(concluidosQuery); // Prepara a query
-                                    concluidosQueryDone.setInt(1, uid); // Adiciona o id do usuário
-                                    ResultSet concluidos = concluidosQueryDone.executeQuery(); // Executa a query
-                                    while (concluidos.next()) { // Loop para contar os pedidos
+                                    ResultSet pedidos3 = s.executeQuery("SELECT id FROM pedidos WHERE active = 2"); // Query para pegar os pedidos concluídos
+                                    while (pedidos3.next()) { // Loop para contar os pedidos
                                         total3 += 1; // Conta os pedidos
                                     }
                                     out.print(total3); // Mostra o total
@@ -146,11 +132,8 @@
                             <h1>
                                 <%
                                     int total4 = 0; // Variável para armazenar o total
-                                    String AndamentoQuery = "SELECT id FROM pedidos WHERE active = 1 AND userid = ?"; // Query para pegar os pedidos em andamento
-                                    PreparedStatement AndamentoQueryDone = conn.prepareStatement(AndamentoQuery); // Prepara a query
-                                    AndamentoQueryDone.setInt(1, uid); // Adiciona o id do usuário
-                                    ResultSet Andamento = AndamentoQueryDone.executeQuery(); // Executa a query
-                                    while (Andamento.next()) { // Loop para contar os pedidos
+                                    ResultSet pedidos4 = s.executeQuery("SELECT id FROM pedidos WHERE active = 1"); // Query para pegar os pedidos em andamento
+                                    while (pedidos4.next()) { // Loop para contar os pedidos
                                         total4 += 1; // Conta os pedidos
                                     }
                                     out.print(total4); // Mostra o total
@@ -236,46 +219,30 @@
                         <div>
                             <!-- Formulario para adicionar um novo produto -->
                             <form id="testeform" action="addPedido" method="POST">
-                                <h1>Adicionar um novo pedido</h1>
+                                <h1>Adicionar um novo produto</h1>
                                 <span style="margin-left: 25px;"><b>NOME</b></span>
                                 <input type="text" name="nome" placeholder="Nome do Cliente" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"
                                        required><hr>
 
                                        <span style="margin-left: 25px;"><b>PRODUTO</b></span>
+                                       <select name="produto" id="produto" style="border-radius: 5px; padding:10px;padding-right: 100px; margin-left: 40px;">
                                         <%
-                                        String pQuery = "SELECT * FROM produtos WHERE usuario_id = ?"; // Query para pegar os produtos
-                                        PreparedStatement pQueryDone = conn.prepareStatement(pQuery); // Prepara a query
-                                        pQueryDone.setInt(1, uid); // Adiciona o id do usuário
-                                        ResultSet uprodutos = pQueryDone.executeQuery(); // Executa a query
-                                        // Veriricar quantidade de produtos 
-                                        int totalRowsProdutos = 0;
-                                        while (uprodutos.next()) {
-                                            totalRowsProdutos++;
+                                        int uproduto = 0; // Variável para armazenar o produto
+                                        ResultSet usuarios = conn.createStatement().executeQuery("SELECT * FROM usuarios ORDER BY id DESC");
+                                        while (usuarios.next()) {
+                                            String nome = usuarios.getString("Nome");
+                                            int tipo = usuarios.getInt("Tipo");
+                                            String cargo = tipo == 1 ? "Administrador" : "Colaborador";
+                                            String data = usuarios.getString("Data");
+                                            int id = usuarios.getInt("id");
+                                            %>
+                                            
+                                            <option value="<%= nome %>"><%= nome %></option>
+                                            
+                                    <%
                                         }
-                                        if(totalRowsProdutos <= 0) { %>
-                                            <span>&nbsp; Nenhum produto encontrado</span>
-                                            <a style="
-                                            text-align: start;
-                                            margin: 0rem auto;
-                                            color: var(--color-primary);
-                                            text-decoration: none;
-                                            margin-left:25px;" href="produtos.jsp">Adicionar um agora mesmo.</a>
-                                            <% } else { %> 
-                                                <select name="produto" id="produto" style="border-radius: 5px; padding:10px;padding-right: 100px; margin-left: 20px;">
-                                <%
-            String pQuery2 = "SELECT * FROM produtos WHERE usuario_id = ?"; // Query para pegar os produtos
-            PreparedStatement pQueryDone2 = conn.prepareStatement(pQuery); // Prepara a query
-            pQueryDone2.setInt(1, uid); // Adiciona o id do usuário
-            ResultSet uprodutos2 = pQueryDone.executeQuery(); // Executa a query
-            while(uprodutos2.next()) { 
-                                                    String nome = uprodutos2.getString("produto_name"); %>
-                                                            <option value="<%= nome %>"><%= nome %></option>
-                                                    
-                                             <% }} %> </select><hr>
-                                            
-                                            
-                           
-                                   
+                                    %>
+                                    </select><hr>
                                 <span style="margin-left: 25px;"><b>DETALHES</b></span>
                                 <input type="text" name="descricao" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
 
@@ -296,7 +263,6 @@
                                 <input type="number" step="0.01" name="valor" placeholder="0"
                                        style="padding: 15px; background-color:var(--color-background);color: var(--color-dark);"><br><br><br>
 
-                                       <input type="hidden" name="userid" value=<%= uid %>> <!-- Input para armazenar o id do usuário -->
                                 <button class="btn btn-danger" id="closeFormButton" type="button"
                                         style="padding-left: 155px;margin-left:15px; padding-right: 155px; padding:10px">Cancelar</button>
 

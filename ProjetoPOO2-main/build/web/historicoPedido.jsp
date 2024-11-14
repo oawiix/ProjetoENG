@@ -4,7 +4,8 @@
 <% if(session.getAttribute("nome") != null) { %>
 <% AppListener appListener = new AppListener();
         Connection conn = appListener.getConnection();
-        Statement s = conn.createStatement(); %>
+        Statement s = conn.createStatement();
+        int uid = (int)session.getAttribute("id"); %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,18 +33,19 @@
     }
     int offset = (page2 - 1) * limit; // Calcula o offset
 
-    String countQuery = "SELECT COUNT(*) FROM pedidos WHERE active = 2";  // Query para contar o total de pedidos
+    String countQuery = "SELECT COUNT(*) FROM pedidos WHERE active = 2 AND userid = ?";  // Query para contar o total de pedidos
 
     if (pesquisaNotAtivo != null && !pesquisaNotAtivo.isEmpty()) {
         countQuery += " AND cliente LIKE '%" + pesquisaNotAtivo + "%'"; // Adiciona a cláusula de pesquisa
     }
     PreparedStatement countStmt = conn.prepareStatement(countQuery); // Prepara a query
+    countStmt.setInt(1, uid); // Adiciona o id do usuário
     ResultSet countResult = countStmt.executeQuery(); // Executa a query
     countResult.next(); // Pega o resultado
     int totalRows = countResult.getInt(1); // Pega o total de pedidos
     int totalPages = (int) Math.ceil(totalRows / (double) limit); // Calcula o total de páginas
 
-    String selectQuery = "SELECT * FROM pedidos WHERE active = 2"; // Query para selecionar os pedidos
+    String selectQuery = "SELECT * FROM pedidos WHERE active = 2 AND userid = ?"; // Query para selecionar os pedidos
 
     if (pesquisaNotAtivo != null && !pesquisaNotAtivo.isEmpty()) {
         selectQuery += " AND cliente LIKE '%" + pesquisaNotAtivo + "%'"; // Adiciona a cláusula de pesquisa
@@ -52,8 +54,9 @@
     selectQuery += " ORDER BY id DESC LIMIT ?, ?"; // Adiciona a cláusula de limite e offset
 
     PreparedStatement selectStmt = conn.prepareStatement(selectQuery); // Prepara a query
-    selectStmt.setInt(1, offset); // Adiciona o offset
-    selectStmt.setInt(2, limit); // Adiciona o limite
+    selectStmt.setInt(1, uid); // Adiciona o id do usuário
+    selectStmt.setInt(2, offset); // Adiciona o offset
+    selectStmt.setInt(3, limit); // Adiciona o limite
     ResultSet pedidosResult = selectStmt.executeQuery(); // Executa a query
 %>
     <!-- Conteudo Main -->

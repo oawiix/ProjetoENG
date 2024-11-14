@@ -7,6 +7,7 @@
 <% conBd conexao = new conBd();
     Connection conn = conexao.getConnection();
     Statement s = conn.createStatement();
+    int uid = (int)session.getAttribute("id");
    %>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -206,14 +207,14 @@
                 <!-- O pop-up (inicialmente oculto com display: none) -->
                 <div id="opentesteform" class="popup" style="display: none;
                      position: fixed;
-                     width: 425px;
-                     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-                     height: 475px;
+                     width: 455px;
+                     box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
+                     height: 535px;
                      top: 50%;
                      left: 50%;
                      transform: translate(-50%, -50%);
                      padding: 25px;
-                     border-radius: 15px;
+                     border-radius: 10px;
                      background-color:var(--color-background)">
                     <div>
                         <div>
@@ -222,17 +223,28 @@
                                 <h1>Adicionar um novo produto</h1>
                                 <span style="margin-left: 25px;"><b>NOME</b></span>
                                 <input type="text" name="nome" placeholder="Nome do Cliente" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"
-                                       required><br>
+                                       required><hr>
 
-                                <span style="margin-left: 25px;"><b>PRODUTO</b></span>
-                                <input type="text" name="produto" placeholder="..." style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);" required><br>
-
+                                       <span style="margin-left: 25px;"><b>PRODUTO</b></span>
+                                       <select name="produto" id="produto" style="border-radius: 5px; padding:10px;padding-right: 100px; margin-left: 40px;">
+                                        <%
+                                        int uproduto = 0; // Variável para armazenar o produto
+                                        ResultSet uprodutos = conn.createStatement().executeQuery("select * from produtos where usuario_id = 12 "); // Query para pegar os produtos
+                                        while (uprodutos.next()) {
+                                            String nome = uprodutos.getString("produto_name"); %>
+                                            
+                                            <option value="<%= nome %>"><%= nome %></option>
+                                            
+                                    <%
+                                        }
+                                    %>
+                                    </select><hr>
                                 <span style="margin-left: 25px;"><b>DETALHES</b></span>
-                                <input type="text" name="descricao" placeholder="Nenhum" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"><br>
+                                <input type="text" name="descricao" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
 
                                 <span style="margin-left: 25px;"><b>QUANTIDADE</b></span>
                                 <input type="number" name="quantidade" placeholder="1" value="1" min="1"
-                                       style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"><br>
+                                       style="padding: 10px;background-color:var(--color-background); color: var(--color-dark); margin-right: -100px;">
 
                                 <button id="incrementButton" class="btn btn-outline-primary" type="button"
                                         style="margin-left:25px;">+</button>
@@ -241,14 +253,14 @@
 
                                 <button id="incrementButton5x" class="btn btn-outline-primary" type="button">+5</button>
 
-                                <button id="decrementButton5x" class="btn btn-outline-primary" type="button">-5</button><br>
+                                <button id="decrementButton5x" class="btn btn-outline-primary" type="button">-5</button><hr> 
 
                                 <span style="margin-left: 25px;"><b>VALOR</b>&nbsp; R$</span>
                                 <input type="number" step="0.01" name="valor" placeholder="0"
-                                       style="padding: 15px;background-color:var(--color-background);color: var(--color-dark);"><br><br>
+                                       style="padding: 15px; background-color:var(--color-background);color: var(--color-dark);"><br><br><br>
 
                                 <button class="btn btn-danger" id="closeFormButton" type="button"
-                                        style="padding-left: 155px; padding-right: 155px; padding:10px">Cancelar</button>
+                                        style="padding-left: 155px;margin-left:15px; padding-right: 155px; padding:10px">Cancelar</button>
 
                                 <button id="adicionarButton" class="btn btn-outline-primary" type="submit"
                                         style="padding-right: 108px; padding-top: 10px; padding-bottom: 10px; padding-left: 108px;">Adicionar</button>

@@ -39,6 +39,7 @@ public class addPedido extends HttpServlet {
                     String descricao = request.getParameter("descricao");
                     int quantidade = Integer.parseInt(request.getParameter("quantidade"));
                     double valor = Double.parseDouble(request.getParameter("valor"));
+                    int userid = Integer.parseInt(request.getParameter("userid"));
 
                     // Define os valores do pedido
                     pedido.setCliente(cliente);
@@ -46,6 +47,7 @@ public class addPedido extends HttpServlet {
                     pedido.setDescricao(descricao);
                     pedido.setQuantidade(quantidade);
                     pedido.setValor(valor);
+                    pedido.setUserId(userid);
 
                     // Salva o pedido
                     pedido.save();

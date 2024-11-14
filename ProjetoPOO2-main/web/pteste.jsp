@@ -33,10 +33,10 @@
     }
     int offset = (page2 - 1) * limit; // Calcula o offset
 
-    String countQuery = "SELECT COUNT(*) FROM pedidos WHERE active = 2 AND userid = ?";  // Query para contar o total de pedidos
+    String countQuery = "SELECT COUNT(*) FROM produtos WHERE usuario_id = ?";  // Query para contar o total de pedidos
 
     if (pesquisaNotAtivo != null && !pesquisaNotAtivo.isEmpty()) {
-        countQuery += " AND cliente LIKE '%" + pesquisaNotAtivo + "%'"; // Adiciona a cláusula de pesquisa
+        countQuery += " AND produto_name LIKE '%" + pesquisaNotAtivo + "%'"; // Adiciona a cláusula de pesquisa
     }
     PreparedStatement countStmt = conn.prepareStatement(countQuery); // Prepara a query
     countStmt.setInt(1, uid); // Adiciona o id do usuário
@@ -45,13 +45,13 @@
     int totalRows = countResult.getInt(1); // Pega o total de pedidos
     int totalPages = (int) Math.ceil(totalRows / (double) limit); // Calcula o total de páginas
 
-    String selectQuery = "SELECT * FROM pedidos WHERE active = 2 AND userid = ?"; // Query para selecionar os pedidos
+    String selectQuery = "SELECT * FROM produtos WHERE usuario_id = ?"; // Query para selecionar os pedidos
 
     if (pesquisaNotAtivo != null && !pesquisaNotAtivo.isEmpty()) {
-        selectQuery += " AND cliente LIKE '%" + pesquisaNotAtivo + "%'"; // Adiciona a cláusula de pesquisa
+        selectQuery += " AND produto_name LIKE '%" + pesquisaNotAtivo + "%'"; // Adiciona a cláusula de pesquisa
     }
 
-    selectQuery += " ORDER BY id DESC LIMIT ?, ?"; // Adiciona a cláusula de limite e offset
+    selectQuery += " ORDER BY produto_id DESC LIMIT ?, ?"; // Adiciona a cláusula de limite e offset
 
     PreparedStatement selectStmt = conn.prepareStatement(selectQuery); // Prepara a query
     selectStmt.setInt(1, uid); // Adiciona o id do usuário
@@ -122,24 +122,116 @@
         <!-- Tabela Historico de Pedidos -->
         <div class="recent-orders" style="margin-top: 50px;">
             <!-- Botão para abrir o pop-up -->
-            <h1>Todos os pedidos       
+            <h1>Todos os produtos       
                 <p>                 
                     <span style="color: rgb(119, 119, 119);"><%= totalRows %></span>
             </p> 
+            <button id="openFormButton" class="btn btn-outline-primary" type="button"
+                                          style="">Adicionar um novo produto</button>
         </h1>
                 <% if (pesquisaNotAtivo != null && !pesquisaNotAtivo.isEmpty()) { %>
                     <p style="font-size: 20px;"><b>Mostrando resultados para</b> <%= pesquisaNotAtivo != null ? pesquisaNotAtivo : "Todos os pedidos" %></p>
                       <% } %>
+
+
+                      <div id="opentesteform" class="popup" style="display: none;
+                      position: fixed;
+                      width: 455px;
+                      box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
+                      height: 400px;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                      padding: 25px;
+                      border-radius: 10px;
+                      background-color:var(--color-background)">
+                     <div>
+                         <div>
+                             <!-- Formulario para adicionar um novo produto -->
+                             <form id="testeform" action="createProduto" method="POST">
+                                <h1>Adicionar um novo produto</h1>
+                                <span style="margin-left: 25px;"><b>NOME</b></span>
+                                <input type="text" name="nome" placeholder="Nome do Cliente" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"
+                                       required><hr>
+                           
+                                   
+                                <span style="margin-left: 25px;"><b>CATEGORIA</b></span>
+                                <input type="text" name="tipo" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
+
+
+                                <span style="margin-left: 25px;"><b>VALOR</b>&nbsp; R$</span>
+                                <input type="number" step="0.01" name="price" placeholder="0"
+                                       style="padding: 15px; background-color:var(--color-background);color: var(--color-dark);"><br><br><br>
+
+                                       <input type="hidden" name="userid" value=<%= uid %>> <!-- Input para armazenar o id do usuário -->
+                                <button class="btn btn-danger" id="closeFormButton" type="button"
+                                        style="padding-left: 155px;margin-left:15px; padding-right: 155px; padding:10px">Cancelar</button>
+
+                                <button id="adicionarButton" class="btn btn-outline-primary" type="submit"
+                                        style="padding-right: 108px; padding-top: 10px; padding-bottom: 10px; padding-left: 108px;">Adicionar</button>
+                            </form>
+                             <!-- Script para incremento e decremento da Quantidade -->
+                             <!-- Fim do Script -->
+                         </div>
+ 
+                     </div>
+                 </div>
+                 <div id="openconfirm" class="popup" style="display: none;
+                      position: fixed;
+                      width: 455px;
+                      box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
+                      height: 150px;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                      padding: 25px;
+                      border-radius: 10px;
+                      background-color:var(--color-background)">
+                    <h1>Produto criado com sucesso.</h1>
+                    <button id="closeconfirm" class="btn btn-outline-primary" type="button"
+                                          style="">Voltar</button>
+                                          <button id="openFormButton3" class="btn btn-outline-primary" type="button"
+                                          style="">Adicionar mais um produto</button>
+                    </div>
+                 <!-- Script para mostrar ou esconder o Pop-up -->
+                    <% 
+                    if(request.getParameter("confirm") != null) { %>
+                        <script>
+                            document.getElementById('openconfirm').style.display = 'block'; // Mostra o pop-up
+                        </script> 
+                        <% } 
+                    %>
+
+                 <script>
+                    document.getElementById('closeconfirm').addEventListener('click', function () {
+                        document.getElementById('openconfirm').style.display = 'none'; // Esconde o pop-up
+                    });
+                     document.getElementById('openFormButton').addEventListener('click', function () {
+                         document.getElementById('opentesteform').style.display = 'block'; // Mostra o pop-up
+                     });
+                     document.getElementById('openFormButton3').addEventListener('click', function () {
+                        document.getElementById('openconfirm').style.display = 'none'; // Esconde o pop-up
+                         document.getElementById('opentesteform').style.display = 'block'; // Mostra o pop-up
+                     });
+                     document.getElementById('closeFormButton').addEventListener('click', function () {
+                         document.getElementById('opentesteform').style.display = 'none'; // Esconde o pop-up
+                     });
+                     document.getElementById('adicionarButton').addEventListener('click', function () {
+                         document.getElementById('opentesteform').style.display = 'none'; // Esconde o pop-up
+                     });
+ 
+                 </script>
+
+
+
 
             <table border="1" id="testetable">
                 <!-- Cabecalho da Tabela -->
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>CLIENTE</th>
                         <th>PRODUTO</th>
-                        <th>DESCRICAO</th>
-                        <th>QUANTIDADE</th>
+                        <th>CATEGORIA</th>
                         <th>VALOR</th>
                         <th></th>
                     </tr>
@@ -154,16 +246,14 @@
                     <% } else { 
                          while (pedidosResult.next()) { %>
                                 <tr>
-                                    <td><%= pedidosResult.getInt("id") %></td> 
-                                    <td><%= pedidosResult.getString("cliente") %></td>
-                                    <td><%= pedidosResult.getString("produto") %></td> 
-                                    <td><%= pedidosResult.getString("descricao") %></td>
-                                    <td><%= pedidosResult.getInt("quantidade") %></td>
-                                    <td><b>R$: </b> <%= pedidosResult.getDouble("valor") %></td>
+                                    <td><%= pedidosResult.getInt("produto_id") %></td>
+                                    <td><%= pedidosResult.getString("produto_name") %></td> 
+                                    <td><%= pedidosResult.getString("produto_type") %></td>
+                                    <td><b>R$: </b><%= pedidosResult.getInt("produto_price") %> </td>
                                     <td>
                                         <!-- Excluir pedido do Banco de Dados -->
-                                        <form action="deletePedido" method="GET">
-                                            <input type="hidden" name="id" value=<%= pedidosResult.getInt("id") %>>
+                                        <form action="deleteProduto" method="GET">
+                                        <input type="hidden" name="id" value=<%= pedidosResult.getInt("produto_id") %>>
                                             <button style="margin-left: -20px" type="submit"
                                                 class="btn btn-outline-danger">Excluir</button>
 

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/signup.css">
-    <title>Registrar | ENG</title>
+    <link rel="stylesheet" href="css/login.css">
+    <title>Login | Projeto POO</title>
 </head>
 
 <body>
@@ -15,24 +15,39 @@
     
     <div class="container" id="container">
         <div class="form-container sign-in">
-            <form action="addUsuario" method="POST">
-                <a href="login.jsp" style="margin-left: -230px; padding:5px;">
+            <form action="login2" method="POST">
+                <a href="index.jsp" style="margin-left: -230px; padding:5px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                       </svg>
                     voltar
                     </a>
-                <h1>Criar uma conta</h1>
-                <span>Prrencha os campos</span><br>
-                <input type="text" id="formName" name="nome" placeholder="Nome Completo">
-                <input type="text" id="formName" name="usuario" placeholder="Usuario">
+                <h1>Identifique-se</h1>
+                <span>Insira o usuario e senha</span><br>
+                <input type="text" id="formName" name="usuario" placeholder="Nome de Usuario">
                 <input type="password" id="formName" name="senha" placeholder="Senha">
-                <input type="email" id="formName" name="email" placeholder="Email">
-                <input name="tipo" id="tipo" style="border-radius: 5px; padding:5px" type="hidden" value="1">
-                <input type="hidden" name="data" style="padding: 5px;border-radius: 5px;" 
-                value="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>">
-
-                <button type="submit" class="btn btn-outline-dark" style="padding:10px; padding-left: 120px; padding-right:120px; font-size:15px; margin-top: 10px" > Concluir </button>
+                <button type="submit" class="btn btn-outline-dark" style="padding:10px; padding-left: 120px; padding-right:120px; font-size:15px; margin-top: 7px" > Entrar </button>
+                <%
+                int wt = request.getParameter("wt") != null ? Integer.parseInt(request.getParameter("wt")) : 0;
+                
+                if (wt != 0) 
+                 { %>
+                    <span style="padding:12px; padding-left: 37px; padding-right:37px; font-size:15px; background-color:rgb(169, 1, 1); color:white; border-radius: 9px;margin-top: 10px; ">
+                        Usuario e/ou senha invalidos</span>
+                        <a href=""  style="margin-top:-5px;">
+                            <p><b>Recuperar usuario/senha</b></p>
+                        </a>
+                        <p style="margin-top: -10px;">Nao possui cadastro?</p>
+                <a href="signup.jsp" style="margin-top:-35px;">
+                    <p><b>Criar conta</b></p>
+                </a>
+                    <% }
+                    else { %>
+                        <p>Nao possui cadastro?</p>
+                        <a href="signup.jsp" style="margin-top:-35px;">
+                            <p><b>Criar conta</b></p>
+                        </a>
+                    <% } %>
             </form>
         </div>
         <div class="toggle-container">

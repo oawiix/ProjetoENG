@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class pedido extends conBd{
+public class pedidocopy extends conBd{
     private Connection conn;
     private int id;
     private String cliente;
@@ -13,9 +13,9 @@ public class pedido extends conBd{
     private int quantidade;
     private double valor;
     private int active;
-    private int userid;
+    
 
-    public pedido() throws Exception {
+    public pedidocopy() throws Exception {
         // Get the connection object
         this.conn = conBd.getConnection();
     }
@@ -76,18 +76,11 @@ public class pedido extends conBd{
         return this.active;
     }
 
-    public void setUserId(int userid) {
-        this.userid = userid;
-    }
-
-    public int getUserId() {
-        return this.userid;
-    }
     // Outros métodos da classe...
 
     public void save() throws SQLException {
         // Salvar o pedido no banco de dados
-        String sql = "INSERT INTO pedidos (cliente, produto, descricao, quantidade, valor, userid) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pedidos (cliente, produto, descricao, quantidade, valor) VALUES (?, ?, ?, ?, ?)";
 
         // Prepare the PreparedStatement
         PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -98,7 +91,6 @@ public class pedido extends conBd{
         stmt.setString(3, this.descricao);
         stmt.setInt(4, this.quantidade);
         stmt.setDouble(5, this.valor);
-        stmt.setInt(6, this.userid);
 
         // Execute the statement
         stmt.executeUpdate();

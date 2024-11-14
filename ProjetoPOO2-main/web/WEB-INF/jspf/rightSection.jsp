@@ -5,6 +5,8 @@
 <% conBd conexao2 = new conBd();
     Connection conn2 = conexao2.getConnection();
     Statement s2 = conn.createStatement();
+        int uid2 = (int)session.getAttribute("id");
+
    %>
 <div class="right-section">
     <div class="nav">
@@ -86,7 +88,10 @@
         </div>
 
         <% 
-            ResultSet lembretes = conn.createStatement().executeQuery("SELECT * FROM lembretes ORDER BY id DESC");
+            String lembretesQuery = "SELECT * FROM lembretes WHERE userid = ? ORDER BY id DESC";
+            PreparedStatement lembretesQueryDone = conn.prepareStatement(lembretesQuery);
+            lembretesQueryDone.setInt(1, uid2);
+            ResultSet lembretes = lembretesQueryDone.executeQuery();
             while (lembretes.next()) {
                 int id = lembretes.getInt("id");
                 String nome3 = lembretes.getString("nome");
@@ -156,6 +161,7 @@
                 <input type="time" name="hora" placeholder="Horario" style="margin-top: 5px; margin-bottom: 5px; margin-left: 5px; padding: 10px;
                 background-color:var(--color-background); color: var(--color-dark);"
                        required><br><br>
+                       <input type="hidden" name="uid" value=<%= uid2 %>>
             <div style="margin-top:10px;">
                <button class="btn btn-danger" id="closeFormButton2" type="button"
                        style="padding-left: 155px; padding-right: 155px; padding:10px">Cancelar</button>
