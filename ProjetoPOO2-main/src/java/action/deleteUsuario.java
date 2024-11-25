@@ -36,17 +36,17 @@ public class deleteUsuario extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {             
                 
-        if (request.getMethod().equals("GET") && request.getParameter("id") != null) {
-            response.sendRedirect("usersPage.jsp");
+        if (request.getMethod().equals("POST") && request.getParameter("id") != null) {
             usuario user;
             try {
                 user = new usuario();
                 int id = Integer.parseInt(request.getParameter("id"));
                 user.setId(id);
                 user.delete();
+                response.sendRedirect("index.jsp");
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

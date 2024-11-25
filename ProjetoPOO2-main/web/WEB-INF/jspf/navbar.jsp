@@ -10,7 +10,7 @@
                     <path
                         d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m-6.202-4.751 1.988-1.657a4.5 4.5 0 0 1 7.537-4.623L7.497 6.5l1 2.5 1.333 3.11c-.56.251-1.18.39-1.833.39a4.5 4.5 0 0 1-1.592-.29L4.747 14.2a7.03 7.03 0 0 1-2.949-2.951M12.496 8a4.5 4.5 0 0 1-1.703 3.526L9.497 8.5l2.959-1.11q.04.3.04.61" />
                 </svg>
-                <h2>Projeto<span class="primary">ENG</span></h2>
+                <h2  style="margin-top:2px">Projeto<span class="primary">ENG</span></h2>
             </div>
             <div class="close" id="close-btn">
                 <span class="material-icons-sharp">
@@ -35,14 +35,12 @@
                 </span>
                 <h3>Historico</h3>
             </a>
-            <% if(session.getAttribute("tipo").equals("1")) { %>
                 <a href="usersPage.jsp">
                     <span class="material-icons-sharp">
                         person_outline
                     </span>
-                    <h3>Usu�rios</h3>
+                    <h3>Perfil</h3>
                 </a>
-                <% } %>
                     <!-- <a href="#">
                     <span class="message-count">0</span>
                     <h3>Mensagens</h3>

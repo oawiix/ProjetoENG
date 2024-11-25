@@ -225,20 +225,25 @@
                      position: fixed;
                      width: 455px;
                      box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
-                     height: 535px;
+                     height: 545px;
                      top: 50%;
                      left: 50%;
                      transform: translate(-50%, -50%);
                      padding: 25px;
                      border-radius: 10px;
-                     background-color:var(--color-background)">
+                     background-color:var(--color-form)">
                     <div>
                         <div>
                             <!-- Formulario para adicionar um novo produto -->
                             <form id="testeform" action="addPedido" method="POST">
                                 <h1>Adicionar um novo pedido</h1>
                                 <span style="margin-left: 25px;"><b>NOME</b></span>
-                                <input type="text" name="nome" placeholder="Nome do Cliente" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"
+                                <style>
+                                    .addinput {
+                                        padding: 10px 15px 10px;background-color:var(--color-background); color: var(--color-dark); border-radius: 8px; margin-left:10px;
+                                    }
+                                </style>
+                                <input class="addinput" type="text" name="nome" placeholder="Nome do Cliente" style="padding: 10px 15px 10px;background-color:var(--color-background); color: var(--color-dark); border-radius: 8px; margin-left:10px"
                                        required><hr>
 
                                        <span style="margin-left: 25px;"><b>PRODUTO</b></span>
@@ -257,11 +262,11 @@
                                             <a style="
                                             text-align: start;
                                             margin: 0rem auto;
-                                            color: var(--color-primary);
+                                            color: var(--color-danger);
                                             text-decoration: none;
-                                            margin-left:25px;" href="produtos.jsp">Adicionar um agora mesmo.</a>
+                                            margin-left:25px;" href="pteste.jsp">Adicionar um agora mesmo.</a>
                                             <% } else { %> 
-                                                <select name="produto" id="produto" style="border-radius: 5px; padding:10px;padding-right: 100px; margin-left: 20px;">
+                                                <select name="produto" id="produto" style="border-radius: 5px; padding:10px;padding-right: 100px; margin-left: 20px; background-color: var(--color-background); color: var(--color-primary);">
                                 <%
             String pQuery2 = "SELECT * FROM produtos WHERE usuario_id = ?"; // Query para pegar os produtos
             PreparedStatement pQueryDone2 = conn.prepareStatement(pQuery); // Prepara a query
@@ -277,24 +282,22 @@
                            
                                    
                                 <span style="margin-left: 25px;"><b>DETALHES</b></span>
-                                <input type="text" name="descricao" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
+                                <input class="addinput" type="text" name="descricao" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
 
                                 <span style="margin-left: 25px;"><b>QUANTIDADE</b></span>
-                                <input type="number" name="quantidade" placeholder="1" value="1" min="1"
-                                       style="padding: 10px;background-color:var(--color-background); color: var(--color-dark); margin-right: -100px;">
+                                <input class="addinput" type="number" name="quantidade" placeholder="1" value="1" min="1"><br>
 
                                 <button id="incrementButton" class="btn btn-outline-primary" type="button"
-                                        style="margin-left:25px;">+</button>
+                                        style="margin-left:20px; margin-top: 10px;">+</button>
 
-                                <button id="decrementButton" class="btn btn-outline-primary" type="button">-</button>
+                                <button id="decrementButton" class="btn btn-outline-primary" type="button" style="margin-top: 10px;">-</button>
 
-                                <button id="incrementButton5x" class="btn btn-outline-primary" type="button">+5</button>
+                                <button id="incrementButton5x" class="btn btn-outline-primary" type="button" style="margin-top: 10px;">+5</button>
 
-                                <button id="decrementButton5x" class="btn btn-outline-primary" type="button">-5</button><hr> 
+                                <button id="decrementButton5x" class="btn btn-outline-primary" type="button" style="margin-top: 10px;">-5</button><hr> 
 
                                 <span style="margin-left: 25px;"><b>VALOR</b>&nbsp; R$</span>
-                                <input type="number" step="0.01" name="valor" placeholder="0"
-                                       style="padding: 15px; background-color:var(--color-background);color: var(--color-dark);"><br><br><br>
+                                <input class="addinput" type="number" step="0.01" name="valor" placeholder="0"><br><br><br>
 
                                        <input type="hidden" name="userid" value=<%= uid %>> <!-- Input para armazenar o id do usuário -->
                                 <button class="btn btn-danger" id="closeFormButton" type="button"
@@ -422,6 +425,9 @@
         <!-- Fim do Nome do Uusuario + Cargo e Hora  -->
     </body>
 </html>
+<% 
+    conn.close(); // Fechar a conexão com o banco de dados
+%>
 <% }
 else {
     response.sendRedirect("index.jsp"); // Redireciona para a página de login

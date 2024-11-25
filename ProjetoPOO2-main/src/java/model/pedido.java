@@ -83,6 +83,13 @@ public class pedido extends conBd{
     public int getUserId() {
         return this.userid;
     }
+
+    public void closeConnection() throws SQLException {
+        // Close the connection
+        if (conn != null) {
+            conn.close();
+        }
+    }
     // Outros métodos da classe...
 
     public void save() throws SQLException {
@@ -102,6 +109,7 @@ public class pedido extends conBd{
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
     public void update() throws SQLException {
@@ -121,6 +129,7 @@ public class pedido extends conBd{
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
     public void delete() throws SQLException {
@@ -149,5 +158,6 @@ public class pedido extends conBd{
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 }

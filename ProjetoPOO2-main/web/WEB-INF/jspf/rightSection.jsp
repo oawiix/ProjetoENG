@@ -10,11 +10,11 @@
    %>
 <div class="right-section">
     <div class="nav">
-        <div class="dark-mode" style="border-radius:0px; margin-top: 10px;">
-            <span style="border-radius:0px">
+        <div class="dark-mode" style="border-radius:8px; margin-top: 10px;">
+            <span style="border-radius:15px 0px 0px 15px">
                 L
             </span>
-            <span style="border-radius:0px">
+            <span style="border-radius:0px 15px 15px 0px">
                 D
             </span>
         </div>
@@ -184,3 +184,6 @@
 
     <!-- Fim Lembretes - Nao finalizado -->
     </section>
+    <% 
+    conn.close(); // Fechar a conexão com o banco de dados
+%>

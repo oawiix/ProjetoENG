@@ -82,6 +82,9 @@
 </body>
 
 </html>
+<% 
+    conn.close(); // Fechar a conexão com o banco de dados
+%>
 <% }
 else {
     response.sendRedirect("dashboard.jsp");

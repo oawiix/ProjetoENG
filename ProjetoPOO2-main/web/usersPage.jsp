@@ -1,10 +1,12 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="model.conBd" %>
-<% if(session.getAttribute("tipo").equals("1")) { %>
+<% if (session.getAttribute("nome") != null) { %>
 <% conBd conexao = new conBd();
         Connection conn = conexao.getConnection();
-        Statement s = conn.createStatement(); %>
+        Statement s = conn.createStatement(); 
+        int uid = (int)session.getAttribute("id"); %>
+        
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,41 +37,88 @@
         <!-- End of New Users Section -->
 
         <!-- Recent Orders Table -->
-        <div class="container">
-            <h1 style="margin-top:20px">Usuarios</h1>
-        
-        <div class="" >
-            <%
-            ResultSet usuarios = conn.createStatement().executeQuery("SELECT * FROM usuarios ORDER BY id DESC");
-            while (usuarios.next()) {
-                String nome = usuarios.getString("Nome");
-                int tipo = usuarios.getInt("Tipo");
-                String cargo = tipo == 1 ? "Administrador" : "Colaborador";
-                String data = usuarios.getString("Data");
-                int id = usuarios.getInt("id");
-            %>
+        <% 
+        String pQuery = "SELECT * FROM usuarios WHERE id = ?";
+        PreparedStatement pQueryDone = conn.prepareStatement(pQuery);
+        pQueryDone.setInt(1, uid);
+        ResultSet usuarios = pQueryDone.executeQuery();
+        %>
 
-            <div class="col-md-4" >
-                <div class="new-users">
-                    <div class="user-list">
-                        <div class="user">
-                            <h2 ><%= nome %></h2>
-                            <p><%= cargo %></p>
-                            <p><b>Data </b> <%= data %></p>
-                            <form action="deleteUser2" method="GET">
-                                <input type="hidden" name="id" value="<%= id %>">
-                                <button style="margin-left: -20px" type="submit"
-                                    class="btn btn-outline-danger">Excluir</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <%
+
+        <div class="container">
+            <h1 style="margin-top:20px">Pagina de Usuario</h1>
+        
+            <div class="up" style="    background-color: var(--color-white);
+            padding: var(--card-padding);
+            box-shadow: var(--box-shadow);
+            border-radius: var(--card-border-radius);">
+
+            <style>
+                .guias {
+                margin-right: 20px;
+                text-decoration: none;
+                color: var(--color-text);
+                transition: color 0.3s;
+                font-weight: 700;
+                font-size: 20px;
+                }
+                .otguias {
+                color: var(--color-usertext);
+                text-decoration: none;
+                font-size: 20px;
+                transition: color 0.3s;
+                font-weight: 300;
+                }
+                .otguias:hover {
+                    color: var(--color-dark);
+                }
+                .guias:hover {
+                    color: var(--color-dark);
             }
-            usuarios.close();
-            %>
+                </style>
+
+            <nav style="background-color: var(--color-white)">
+                <div class="container-fluid">
+                    <a class="guias" href="usersPage.jsp">Geral</a>
+                    <a class="otguias" href="usersPage2.jsp">Seguranca</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                    </div>
+                    </div>
+                    </nav>
+                <div style="margin-top:25px" >
+            <% if (usuarios.next()) { %>
+            <h1><%= usuarios.getString("nome") %> <span style="font-size: 18px; color: var(--color-usertext); margin-left: 5px;">(<%= usuarios.getString("usuario") %>)</span><br>
+                <span style="font-size: 14px; font-weight: 300;">Entrou em <%= usuarios.getString("data") %></span></h1>
+            <hr>
+            
+                <style>
+                    .info {
+                        background-color: #f0f0f0;
+                        border-radius: 5px;
+                        padding: 10px;
+                        margin-bottom: 15px;
+                    }
+                    #savebutton {
+                        padding: 10px 15px 10px;
+                        font-weight: 700;
+                        border-radius: 5px;
+                        margin-left: 910px;
+                    }
+                </style>
+
+            <form style="margin-top: 20px;">
+            <h2>Nome</h2>
+            <input class="info" type="text" name="nome" value="<%= usuarios.getString("nome") %>"> 
+            <button class="btn btn-outline-success" id="savebutton" type="submit">Salvar</button>   
+            </form>
+               <% } %>
             </div>
+       </div>
 
     </main>
 
@@ -79,7 +128,9 @@
 </body>
 
 </html>
-<% }
-else {
-    response.sendRedirect("dashboard.jsp");
+<% 
+    conn.close(); // Fechar a conexão com o banco de dados
+%>
+<% } else {
+    response.sendRedirect("index.jsp");
 } %>

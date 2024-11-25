@@ -1,21 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 :root{
-    --color-primary: #a90000;
+    --color-primary: #323232;
     --color-danger: #1e319a;
     --color-success: #1B9C85;
     --color-warning: #F7D060;
     --color-white: #fff;
     --color-info-dark: #7d8da1;
     --color-dark: #363949;
+    --color-usertext: #7e7e7e;
     --color-light: rgba(132, 139, 200, 0.18);
     --color-dark-variant: #677483;
     --color-background: #F0F0F0;
-
+    --color-sidebar: #F0F0F0;
+    --color-text: #000000;
     --card-border-radius: 0.5rem;
     --border-radius-1: 0.4rem;
     --border-radius-2: 0.5rem;
-
+    --color-form: #fff;
     --card-padding: 2rem;
     --padding-1: 2rem;
 
@@ -23,12 +25,16 @@
 }
 
 .dark-mode-variables{
+    --color-usertext: #b8b8b8;
     --color-background: #121212;
-    --color-white: #202528;
+    --color-white: #1d1d1d;
+    --color-form: #181818;
     --color-dark: #edeffd;
-    --color-primary: #ff4444;
+    --color-primary: #5c5c5c;
     --color-dark-variant: #a3bdcc;
     --color-light: rgba(0, 0, 0, 0.4);
+    --color-sidebar: #121212;
+    --color-text: #fff;
 
 }
 
@@ -144,6 +150,7 @@ b{
     display: grid;
     width: 96%;
     margin: 0 auto;
+    
     gap: 1.8rem;
     grid-template-columns: 12rem auto 23rem;
 }
@@ -156,7 +163,7 @@ aside .toggle{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1.4rem;
+    margin-top: 2rem;
 }
 
 aside .toggle .logo{
@@ -177,12 +184,13 @@ aside .toggle .close{
 aside .sidebar{
     display: flex;
     flex-direction: column;
-    background-color: var(--color-white);
+    background-color: var(--color-sidebar);
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius-2);
     height: 88vh;
     position: relative;
-    top: 1.5rem;
+    top: 2rem;
+    margin-top: 30px;
     transition: all 0.3s ease;
 }
 
@@ -194,7 +202,7 @@ aside .sidebar a{text-decoration: none;
     display: flex;
     align-items: center;
     color: var(--color-info-dark);
-    height: 5rem;
+    height: 3rem;
     gap: 0.8rem;
     position: relative;
     margin-left: 2rem;
@@ -232,7 +240,7 @@ aside .sidebar a.active span{
 }
 
 aside .sidebar a:hover{
-    color: var(--color-primary);
+    color: var(--color-dark);
 }
 
 aside .sidebar a:hover span{
@@ -358,7 +366,7 @@ main .recent-orders a{
     text-align: center;
     display: block;
     margin: 1rem auto;
-    color: var(--color-primary);
+    color: var(--color-text);
 }
 
 .right-section{
@@ -495,7 +503,7 @@ main .recent-orders a{
 .right-section .reminders .add-reminder{
     background-color: var(--color-white);
     border: 2px dashed var(--color-primary);
-    color: var(--color-primary);
+    color: var(--color-text);
     display: flex;
     align-items: center;
     justify-content: center;

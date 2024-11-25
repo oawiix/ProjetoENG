@@ -190,6 +190,9 @@
 
 </body>
 </html>
+<% 
+    conn.close(); // Fechar a conexão com o banco de dados
+%>
 <% }
 else {
     response.sendRedirect("index.jsp"); // Redireciona para a página de login

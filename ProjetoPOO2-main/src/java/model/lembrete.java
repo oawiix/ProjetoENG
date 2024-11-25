@@ -66,6 +66,13 @@ public class lembrete extends conBd {
     public int setUserId() {
         return this.userid;
     }
+
+    public void closeConnection() throws SQLException {
+        // Fechar a conexão com o banco de dados
+        if (conn != null) {
+            conn.close();
+        }
+    }
     // Outros métodos da classe...
     public void save() throws SQLException {
         // Salvar o usuário no banco de dados
@@ -83,6 +90,7 @@ public class lembrete extends conBd {
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
     public void update() throws SQLException {
@@ -100,6 +108,7 @@ public class lembrete extends conBd {
         stmt.setInt(4, this.id);
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
     public void delete() throws SQLException {
@@ -114,6 +123,7 @@ public class lembrete extends conBd {
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
 }

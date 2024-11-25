@@ -56,6 +56,10 @@ public class produto extends conBd{
         return this.userid;
     }	
 
+    public void closeConnection() throws SQLException {
+        // Close the connection
+        conn.close();
+    }
     // Outros métodos da classe...
 
     public void save() throws SQLException {
@@ -73,6 +77,7 @@ public class produto extends conBd{
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
     public void update() throws SQLException {
@@ -90,6 +95,7 @@ public class produto extends conBd{
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
     public void delete() throws SQLException {
@@ -104,6 +110,7 @@ public class produto extends conBd{
 
         // Execute the statement
         stmt.executeUpdate();
+        closeConnection();
     }
 
 }

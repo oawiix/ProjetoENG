@@ -138,30 +138,35 @@
                       position: fixed;
                       width: 455px;
                       box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
-                      height: 400px;
+                      height: 380px;
                       top: 50%;
                       left: 50%;
                       transform: translate(-50%, -50%);
                       padding: 25px;
                       border-radius: 10px;
-                      background-color:var(--color-background)">
+                      background-color:var(--color-form)">
                      <div>
+                        <style>
+                            .addinput {
+                                padding: 10px 15px 10px;background-color:var(--color-background); color: var(--color-dark); border-radius: 8px; margin-left:10px;
+                            }
+                        </style>
                          <div>
                              <!-- Formulario para adicionar um novo produto -->
                              <form id="testeform" action="createProduto" method="POST">
                                 <h1>Adicionar um novo produto</h1>
                                 <span style="margin-left: 25px;"><b>NOME</b></span>
-                                <input type="text" name="nome" placeholder="Nome do Cliente" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"
+                                <input class="addinput" type="text" name="nome" placeholder="Nome do Cliente" style="padding: 15px;background-color:var(--color-background); color: var(--color-dark);"
                                        required><hr>
                            
                                    
                                 <span style="margin-left: 25px;"><b>CATEGORIA</b></span>
-                                <input type="text" name="tipo" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
+                                <input class="addinput" type="text" name="tipo" placeholder="Nenhum" style="padding: 10px;background-color:var(--color-background); color: var(--color-dark);"><hr>
 
 
                                 <span style="margin-left: 25px;"><b>VALOR</b>&nbsp; R$</span>
-                                <input type="number" step="0.01" name="price" placeholder="0"
-                                       style="padding: 15px; background-color:var(--color-background);color: var(--color-dark);"><br><br><br>
+                                <input class="addinput" type="number" step="0.01" name="price" placeholder="0"
+                                       ><br><br><br>
 
                                        <input type="hidden" name="userid" value=<%= uid %>> <!-- Input para armazenar o id do usuário -->
                                 <button class="btn btn-danger" id="closeFormButton" type="button"
@@ -189,9 +194,9 @@
                       background-color:var(--color-background)">
                     <h1>Produto criado com sucesso.</h1>
                     <button id="closeconfirm" class="btn btn-outline-primary" type="button"
-                                          style="">Voltar</button>
+                                          >Voltar</button>
                                           <button id="openFormButton3" class="btn btn-outline-primary" type="button"
-                                          style="">Adicionar mais um produto</button>
+                                          >Adicionar mais um produto</button>
                     </div>
                  <!-- Script para mostrar ou esconder o Pop-up -->
                     <% 
@@ -280,6 +285,9 @@
 
 </body>
 </html>
+<% 
+    conn.close(); // Fechar a conexão com o banco de dados
+%>
 <% }
 else {
     response.sendRedirect("index.jsp"); // Redireciona para a página de login
