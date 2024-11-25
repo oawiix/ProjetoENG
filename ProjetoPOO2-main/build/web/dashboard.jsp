@@ -25,7 +25,15 @@
     </head>
 
     <body>
+ <style>
+aside .sidebar a.dashboard{
+    color: var(--color-dark);
+}
 
+aside .sidebar a.dashboard span{
+    margin-left: 0.6rem;
+}
+ </style>
         <%@ include file="WEB-INF/jspf/navbar.jsp" %> <!-- Inclui a navbar -->
         <%
             int page2 = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1; // Pega o valor da página

@@ -23,19 +23,19 @@
             <a>
                 <h1><b>Painel</b></h1>
             </a>
-            <a href="dashboard.jsp" class="">
+            <a href="dashboard.jsp" class="dashboard">
                 <span class="material-icons-sharp">
                     insights
                 </span>
                 <h3>Geral</h3>
             </a>
-            <a href="historicoPedido.jsp">
+            <a href="historicoPedido.jsp" class="historico">
                 <span class="material-icons-sharp">
                     receipt_long
                 </span>
                 <h3>Historico</h3>
             </a>
-                <a href="usersPage.jsp">
+                <a href="usersPage.jsp" class="perfil">
                     <span class="material-icons-sharp">
                         person_outline
                     </span>
@@ -45,7 +45,7 @@
                     <span class="message-count">0</span>
                     <h3>Mensagens</h3>
                 </a> -->
-                 <a href="pteste.jsp">
+                 <a href="pteste.jsp" class="produtos">
                     <span class="material-icons-sharp">
                         inventory
                     </span>

@@ -23,7 +23,15 @@
 </head>
 
 <body>
-
+    <style>
+        aside .sidebar a.perfil{
+            color: var(--color-dark);
+        }
+        
+        aside .sidebar a.perfil span{
+            margin-left: 0.6rem;
+        }
+         </style>
     <%@ include file="WEB-INF/jspf/navbar.jsp" %>
     <!-- End of Sidebar Section -->
 
@@ -97,7 +105,7 @@
             <hr>
             
                 <style>
-                    .info {
+                    .info2 {
                         background-color: #f0f0f0;
                         border-radius: 5px;
                         padding: 10px;
@@ -113,7 +121,7 @@
 
             <form style="margin-top: 20px;">
             <h2>Nome</h2>
-            <input class="info" type="text" name="nome" value="<%= usuarios.getString("nome") %>"> 
+            <input class="info2" type="text" name="nome" value="<%= usuarios.getString("nome") %>"> 
             <button class="btn btn-outline-success" id="savebutton" type="submit">Salvar</button>   
             </form>
                <% } %>

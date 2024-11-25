@@ -39,7 +39,7 @@ public class updateUsuario extends HttpServlet {
             throws ServletException, IOException {
         
                 try {
-                    if (request.getParameter("senha2").equals(request.getParameter("senha3")) )  {
+                    if (request.getParameter("senha2").equals(request.getParameter("senha3")) && request.getParameter("senha2").length() > 0 && request.getParameter("senha1").equals(request.getParameter("senhadb"))) {
                     usuario user = new usuario();
                     String nome = request.getParameter("nome");
                     String email = request.getParameter("email");

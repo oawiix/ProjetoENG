@@ -22,6 +22,15 @@
 </head>
 
 <body>
+    <style>
+        aside .sidebar a.produtos{
+            color: var(--color-dark);
+        }
+        
+        aside .sidebar a.produtos span{
+            margin-left: 0.6rem;
+        }
+         </style>
     <%@ include file="WEB-INF/jspf/navbar.jsp" %> <!-- Inclui navbar -->
  
     <%

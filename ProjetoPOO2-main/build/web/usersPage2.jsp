@@ -2,7 +2,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="model.conBd" %>
 <% if (session.getAttribute("nome") != null) { %>
-<% 
+<% conBd conexao = new conBd();
      Connection conn = conexao.getConnection();
         Statement s = conn.createStatement(); 
         int uid = (int)session.getAttribute("id"); %>
@@ -22,7 +22,15 @@
 </head>
 
 <body>
-
+    <style>
+        aside .sidebar a.perfil{
+            color: var(--color-dark);
+        }
+        
+        aside .sidebar a.perfil span{
+            margin-left: 0.6rem;
+        }
+         </style>
     <%@ include file="WEB-INF/jspf/navbar.jsp" %>
     <!-- End of Sidebar Section -->
 
@@ -96,7 +104,7 @@
             <hr>
             
                 <style>
-                    .info {
+                    .info2 {
                         background-color: #f0f0f0;
                         border-radius: 5px;
                         padding: 10px 15px 10px;
@@ -174,13 +182,13 @@ if(request.getParameter("error") != null)
             <form style="margin-top: 20px;" action="updateUsuario" method="POST">
                 <input type="hidden" name="nome" value=<%= usuarios.getString("nome") %>>
                 <h2>Email</h2>
-                <input class="info" type="email" name="email" value="<%= usuarios.getString("email") %>"> 
+                <input class="info2" type="email" name="email" value="<%= usuarios.getString("email") %>"> 
             <h2>Senha</h2>
             <input type="hidden" name="usuario" value=<%= usuarios.getString("usuario") %>>
-            <input class="info" type="password" name="senha1" value="" placeholder="Insira a senha atual..."><br>
-            <input class="info" type="password" name="senha2" value="" placeholder="Insira a nova senha..."><br>
-            <input class="info" type="password" name="senha3" value="" placeholder="Confirme a senha..."><br>
-            <input type="text" name="senhadb" value=<%= usuarios.getString("senha") %>>
+            <input class="info2" type="password" name="senha1" value="" placeholder="Insira a senha atual..."><br>
+            <input class="info2" type="password" name="senha2" value="" placeholder="Insira a nova senha..."><br>
+            <input class="info2" type="password" name="senha3" value="" placeholder="Confirme a senha..."><br>
+            <input type="hidden" name="senhadb" value=<%= usuarios.getString("senha") %>>
             <input type="hidden" name="tipo" value=<%= usuarios.getString("tipo") %>>
             <input type="hidden" name="id" value=<%= uid %>>
             <button class="btn btn-outline-danger" id="confirmbutton" type="button">Excluir conta</button> 
@@ -206,7 +214,7 @@ if(request.getParameter("error") != null)
                 <form action="deleteUser2" method="POST">
                 <input type="hidden" name="id" value=<%= uid %>>
                 <button type="submit" class="btn btn-danger" style="margin-top: 20px; margin-right: 5px;">Sim</button>
-                <button class="btn btn-primary" style="margin-top: 20px;" id="closeform">Nao</button>
+                <button type="button" class="btn btn-primary" style="margin-top: 20px;" id="closeform">Nao</button>
             </form>
             </div>
        </div>
