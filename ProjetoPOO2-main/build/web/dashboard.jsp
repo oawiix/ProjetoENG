@@ -312,7 +312,7 @@ aside .sidebar a.dashboard span{
                                         style="padding-left: 155px;margin-left:15px; padding-right: 155px; padding:10px">Cancelar</button>
 
                                 <button id="adicionarButton" class="btn btn-outline-primary" type="submit"
-                                        style="padding-right: 108px; padding-top: 10px; padding-bottom: 10px; padding-left: 108px;">Adicionar</button>
+                                        style="padding-right: 108px; padding-top: 10px; padding-bottom: 10px; padding-left: 108px; margin-left: 10px;">Adicionar</button>
                             </form>
                             <!-- Script para incremento e decremento da Quantidade -->
                             <script>

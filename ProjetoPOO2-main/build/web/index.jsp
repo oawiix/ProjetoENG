@@ -38,7 +38,7 @@
         .card-content { display: flex; margin-top: 24px; width: 381px; max-width: 100%; flex-direction: column; justify-content: center; }
         .card-title { color: #000; font-weight: 500; }
         .card-description { color: #828282; font-weight: 400; line-height: 36px; margin-top: 0px; }
-        .split-section { align-self: stretch; margin-top: 180px; }
+        .split-section { align-self: stretch; margin-top: 50px; }
 
 
         @media (max-width: 991px) { .split-section { max-width: 100%; margin-top: 40px; } }
@@ -50,7 +50,7 @@
         @media (max-width: 991px) { .split-text { max-width: 100%; margin-top: 40px; } }
         .split-heading { color: #000; font-size: 48px; font-weight: 600; letter-spacing: -0.96px; }
         @media (max-width: 991px) { .split-heading { font-size: 40px; } }
-        .split-details { align-self: stretch; display: flex; margin-top: 48px; flex-direction: column; justify-content: start; }
+        .split-details { align-self: stretch; display: flex; margin-top: 8px; flex-direction: column; justify-content: start; }
         @media (max-width: 991px) { .split-details { max-width: 100%; margin-top: 40px; } }
         .detail-item { display: flex; width: 100%; flex-direction: column; justify-content: center; }
         @media (max-width: 991px) { .detail-item { max-width: 100%; } }
@@ -86,8 +86,8 @@
 
 
 
-        .quote-section { background-color: #f7f7f7; display: flex; margin-top: 150px; width: 100%; gap: 20px; overflow: hidden; font-family: Inter, sans-serif; flex-wrap: wrap; justify-content: space-between; padding: 60px 2px 60px; }
-        @media (max-width: 991px) { .quote-section { max-width: 100%; margin-top: 40px; padding: 0 20px; } }
+        .quote-section { background-color: #f7f7f7; display: flex; margin-top: 50px; width: 100%; gap: 20px; overflow: hidden; font-family: Inter, sans-serif; flex-wrap: wrap; justify-content: space-between; padding: 60px 2px 60px; }
+        @media (max-width: 991px) { .quote-section { max-width: 100%; margin-top: 20px; padding: 0 20px; } }
         
 
 
@@ -142,14 +142,15 @@
         <header class="nav-container">
           
           <div class="site-name">
+            <a href="index.jsp" style="text-decoration: none; color:black">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-wrench-adjustable-circle-fill" viewBox="0 0 16 16">
               <path d="M6.705 8.139a.25.25 0 0 0-.288-.376l-1.5.5.159.474.808-.27-.595.894a.25.25 0 0 0 .287.376l.808-.27-.595.894a.25.25 0 0 0 .287.376l1.5-.5-.159-.474-.808.27.596-.894a.25.25 0 0 0-.288-.376l-.808.27z"/>
               <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m-6.202-4.751 1.988-1.657a4.5 4.5 0 0 1 7.537-4.623L7.497 6.5l1 2.5 1.333 3.11c-.56.251-1.18.39-1.833.39a4.5 4.5 0 0 1-1.592-.29L4.747 14.2a7.03 7.03 0 0 1-2.949-2.951M12.496 8a4.5 4.5 0 0 1-1.703 3.526L9.497 8.5l2.959-1.11q.04.3.04.61"/>
             </svg>
-            <span style="font-weight: 700;"><i>Projeto ENG</i></span>
+            <span style="font-weight: 700;"><i>Projeto ENG</i></span></a>
           </div>
           <nav class="nav-items">
-            <a href="#" class="navlinks">Sobre</a>
+            <a href="about.jsp" class="navlinks">Sobre</a>
             <button class="cta-button" onclick="window.location.href='login.jsp'">Entrar</button>
           </nav>
         </header>
@@ -198,16 +199,16 @@
                   <h2 class="split-heading">Nao perca tempo</h2>
                   <div class="split-details">
                     <div class="detail-item">
-                      <h3 class="detail-title">Subheading</h3>
-                      <p class="detail-description">Body text for whatever you'd like to expand on the main point.</p>
+                      <h3 class="detail-title">Produtividade</h3>
+                      <p class="detail-description">Organize e aumente sua produtividade.</p>
                     </div>
                     <div class="detail-item">
-                      <h3 class="detail-title">Subheading</h3>
-                      <p class="detail-description">Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes.</p>
+                      <h3 class="detail-title">Intuitivo</h3>
+                      <p class="detail-description">Entenda e saiba onde fazer tudo com pouquissimo tempo.</p>
                     </div>
                     <div class="detail-item">
-                      <h3 class="detail-title">Subheading</h3>
-                      <p class="detail-description">Body text for whatever you'd like to add more to the main point. It provides details, explanations, and context.</p>
+                      <h3 class="detail-title">Trajetoria</h3>
+                      <p class="detail-description">Veja analises de desempenho e tenha controle do seu negocio.</p>
                     </div>
                   </div>
                   <div class="split-buttons">
@@ -216,7 +217,7 @@
                 </div>
               </div>
               <div class="split-image">
-                <img width="400px" height="400px" src="https://img.freepik.com/free-vector/time-management-concept-with-man-meditate-yoga-pose-icons-clock-gear-target-calendar-vector-doodle-illustration-businessman-relax-signs-watch-hourglass-graph-icons_107791-11220.jpg?t=st=1731531642~exp=1731535242~hmac=eaab6c032b377d883ce6f5306486e6177964d0373ee6bfd653ef3c5f5431e0b4&w=1800" alt="Feature image" class="feature-image" loading="lazy">
+                <!-- <img width="400px" height="400px" src="" alt="Feature image" class="feature-image" loading="lazy"> -->
                 </div>
             </div>
           </section>
@@ -241,36 +242,7 @@
             </article>
           </div>
         -->
-          <h2 class="section-heading">Nossa Equipe</h2> 
-        
-          <div class="testimonial-container">
-            <!--
-            <blockquote class="testimonial-card">
-              <p class="testimonial-text"> </p>
-              <footer class="avatar">
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/67dbc2b3abd7ba2b199257ad113004315a8d161da7cdf226d0fb43b4dc0bf8b1?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Avatar" class="social-icon" loading="lazy">
-                <div>
-                  <cite class="testimonial-title">Name</cite>
-                  <p class="testimonial-text">Description</p>
-                </div>
-              </footer>
-            </blockquote>-->
 
-            <blockquote class="testimonial-card">
-              <p class="testimonial-text"> </p>
-              <footer class="avatar">
-                <div>
-                  <div class="profile">
-                  <img style="border-radius: 8px; margin-right: 25px;" height="100" width="100" src="https://scontent.fssz1-1.fna.fbcdn.net/v/t39.30808-1/441397320_1622461721875377_4503024080309062229_n.jpg?stp=dst-jpg_s200x200&_nc_cat=111&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeGBvFPWoJW-1N6O31Aj-rxxwwhHknrcy87DCEeSetzLzjPOkvbkPvYdvTOn7IU1MykzZv6YtNJk6GNo2KPRUBqu&_nc_ohc=BKSBvaSRKkEQ7kNvgGLR37s&_nc_zt=24&_nc_ht=scontent.fssz1-1.fna&_nc_gid=AUTkOdOL9GdCVYz5u2cubPF&oh=00_AYD0Ec5gXef12GXhU5GiFPlLO9yzUzJSiNSb0rrz7FWCdg&oe=673AEEC0" alt="Avatar" loading="lazy">
-                
-                  <cite class="testimonial-title">Felipe Fernandes
-                    <p class="testimonial-text">Estudante</p>
-                  </cite>
-                  
-                  </div>
-                </div>
-              </footer>
-            </blockquote>
             <!--
             <blockquote class="testimonial-card">
               <p class="testimonial-text"> </p>
@@ -282,22 +254,22 @@
                 </div>
               </footer>
             </blockquote>-->
+            <section class="quote-section">
+              <h2 class="quote-heading">Nos acompanhe</h2>
+              <div class="social-icons">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/199c9a3c64fa87237dabe74b1aff1fe617935141f37a07ba364b7012e90e628c?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1bac3668b19309ab1c82835d154f9962b24bad9c262723d53374e3173c3e762?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c9c8d64becb556072cf4288b2dadd32d18a3ce8e19d5cc15f298f66d1125313b?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0828515f09127d365461d17e1036e88788811bd5c0258116139d171a870fbe56?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
+              </div>
+    
+              <div class="quote-buttons">
+              </div>
           </div>
+          </section>
         </main>
         
-        <section class="quote-section">
-          <h2 class="quote-heading">Nos acompanhe</h2>
-          <div class="social-icons">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/199c9a3c64fa87237dabe74b1aff1fe617935141f37a07ba364b7012e90e628c?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1bac3668b19309ab1c82835d154f9962b24bad9c262723d53374e3173c3e762?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c9c8d64becb556072cf4288b2dadd32d18a3ce8e19d5cc15f298f66d1125313b?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0828515f09127d365461d17e1036e88788811bd5c0258116139d171a870fbe56?placeholderIfAbsent=true&apiKey=9f1206a5b5274f348884f89b362ac322" alt="Social icon" class="social-icon" loading="lazy">
-          </div>
 
-          <div class="quote-buttons">
-          </div>
-
-        </section>
         
         <footer class="footer">
           <hr class="footer-divider">

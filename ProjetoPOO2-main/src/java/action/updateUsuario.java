@@ -39,7 +39,10 @@ public class updateUsuario extends HttpServlet {
             throws ServletException, IOException {
         
                 try {
-                    if (request.getParameter("senha2").equals(request.getParameter("senha3")) && request.getParameter("senha2").length() > 0 && request.getParameter("senha1").equals(request.getParameter("senhadb"))) {
+
+                    if (request.getParameter("senha2").equals(request.getParameter("senha3")) 
+                    && request.getParameter("senha2").length() > 0 
+                    && request.getParameter("senha1").equals(request.getParameter("senhadb"))) {
                     usuario user = new usuario();
                     String nome = request.getParameter("nome");
                     String email = request.getParameter("email");
@@ -59,6 +62,29 @@ public class updateUsuario extends HttpServlet {
 
                     // Redireciona para a página de dashboard após a atualização
                     response.sendRedirect("usersPage2.jsp?success=1"); }
+                    else if (request.getParameter("senha2").length() == 0
+                    && request.getParameter("senha1").equals(request.getParameter("senhadb"))
+                    && request.getParameter("senha3").length() == 0) {
+                        usuario user = new usuario();
+                        String nome = request.getParameter("nome");
+                        String email = request.getParameter("email");
+                        String usuario = request.getParameter("usuario");
+                        String senha = request.getParameter("senhadb");
+                        String tipo = request.getParameter("tipo");
+                        int id = Integer.parseInt(request.getParameter("id"));
+    
+                        user.setNome(nome);
+                        user.setEmail(email);
+                        user.setUsuario(usuario);
+                        user.setSenha(senha);
+                        user.setTipo(tipo);
+                        user.setId(id);
+    
+                        user.update();
+    
+                        // Redireciona para a página de dashboard após a atualização
+                        response.sendRedirect("usersPage2.jsp?success=1");;
+                    }
                     else {
                         response.sendRedirect("usersPage2.jsp?error=1");
                     }

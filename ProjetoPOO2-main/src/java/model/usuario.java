@@ -124,6 +124,38 @@ public class usuario extends conBd {
         closeConnection();
     }
 
+    public void deletedata() throws SQLException {
+
+
+        // Deletar o usuario no banco de dados
+        String sql = "DELETE FROM produtos WHERE usuario_id = ?";
+        // Prepare the PreparedStatement
+        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        // Bind the parameters
+        stmt.setInt(1, this.id);
+        // Execute the statement
+        stmt.executeUpdate();
+
+                // Deletar o usuario no banco de dados
+                String sql2 = "DELETE FROM pedidos WHERE userid = ?";
+                // Prepare the PreparedStatement
+                PreparedStatement stmt2 = this.conn.prepareStatement(sql2);
+                // Bind the parameters
+                stmt2.setInt(1, this.id);
+                // Execute the statement
+                stmt2.executeUpdate();
+
+                        // Deletar o usuario no banco de dados
+        String sql3 = "DELETE FROM lembretes WHERE userid = ?";
+        // Prepare the PreparedStatement
+        PreparedStatement stmt3 = this.conn.prepareStatement(sql3);
+        // Bind the parameters
+        stmt3.setInt(1, this.id);
+        // Execute the statement
+        stmt3.executeUpdate();
+
+    }
+
     public void delete() throws SQLException {
 
 

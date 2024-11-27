@@ -65,14 +65,13 @@
         <div class="usuario-logado" style="margin-top:10px">
             <!-- Usuario -->
             <% String nome2=(String) session.getAttribute("nome"); %>
+            <a href="usersPage.jsp" style="text-decoration: none;">
                 <h2>
                     <%= nome2 %>
                 </h2>
+            </a>
                 <!-- Cargo -->
-                <% String modo=(String) session.getAttribute("tipo"); String modoText=modo.equals("1") ? "Administrador"
-                    : "Usuario" ; %>
                     <p>
-                        <%= modoText %>
                     </p>
         </div>
     </div>

@@ -21,7 +21,7 @@
 
         <div class="sidebar">
             <a>
-                <h1><b>Painel</b></h1>
+                <h1><b>   </b></h1>
             </a>
             <a href="dashboard.jsp" class="dashboard">
                 <span class="material-icons-sharp">
@@ -29,18 +29,6 @@
                 </span>
                 <h3>Geral</h3>
             </a>
-            <a href="historicoPedido.jsp" class="historico">
-                <span class="material-icons-sharp">
-                    receipt_long
-                </span>
-                <h3>Historico</h3>
-            </a>
-                <a href="usersPage.jsp" class="perfil">
-                    <span class="material-icons-sharp">
-                        person_outline
-                    </span>
-                    <h3>Perfil</h3>
-                </a>
                     <!-- <a href="#">
                     <span class="message-count">0</span>
                     <h3>Mensagens</h3>
@@ -50,6 +38,21 @@
                         inventory
                     </span>
                     <h3>Produtos</h3>
+
+                    <a href="historicoPedido.jsp" class="historico">
+                        <span class="material-icons-sharp">
+                            receipt_long
+                        </span>
+                        <h3>Historico</h3>
+                    </a>
+                    
+                    <a href="usersPage.jsp" class="perfil">
+                        <span class="material-icons-sharp">
+                            person_outline
+                        </span>
+                        <h3>Perfil</h3>
+                    </a>
+
                 <!--
                     <a href="#">
                     <span class="material-icons-sharp">

@@ -118,16 +118,71 @@
                         margin-left: 910px;
                     }
                 </style>
+               <div id="deleteconfirm" class="popup" style="display: none;
+               position: fixed;
+               width: 400px;
+               box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
+               height: 175px;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               padding: 25px;
+               border-radius: 10px;
+               background-color:var(--color-background)">
+                <h2>Tem certeza que deseja excluir todos os dados?</h2>
+                <h3>Este processo e irreversivel</h3>
 
-            <form style="margin-top: 20px;">
-            <h2>Nome</h2>
-            <input class="info2" type="text" name="nome" value="<%= usuarios.getString("nome") %>"> 
-            <button class="btn btn-outline-success" id="savebutton" type="submit">Salvar</button>   
+                <form action="deleteuserdata" method="POST">
+                <input type="hidden" name="id" value=<%= uid %>>
+                <button type="submit" class="btn btn-danger" style="margin-top: 20px; margin-right: 5px;">Sim</button>
+                <button type="button" class="btn btn-primary" style="margin-top: 20px;" id="closedelete">Nao</button>
             </form>
+        </div>
+
+
+            <h2 style="margin-top:20px">Deletar dados</h2>
+            <button class="btn btn-outline-danger" id="excluirbutton" type="submit">Excluir todos os dados</button>   
+            <!-- <button class="btn btn-outline-success" id="savebutton" type="submit">Salvar</button>  -->
+
                <% } %>
             </div>
        </div>
+       <script>
+        document.getElementById("excluirbutton").addEventListener("click", function() {
+            document.getElementById("deleteconfirm").style.display = "block";
+        });
+        document.getElementById("closedelete").addEventListener("click", function() {
+            document.getElementById("deleteconfirm").style.display = "none";
+        });	
+    </script>
 
+<div id="deleteconfirmmsg" class="popup" style="display: none;
+position: fixed;
+width: 415px;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.10);
+height: 170px;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+padding: 25px;
+border-radius: 10px;
+background-color:var(--color-background)">
+<h1>Todos os dados foram excluidos</h1>
+<button id="deleteconfirmbutton" class="btn btn-outline-primary" type="button"
+                    >Voltar</button>
+</div>
+<!-- Script para mostrar ou esconder o Pop-up -->
+<% 
+if(request.getParameter("msg") != null) 
+    { %>
+  <script>
+      document.getElementById('deleteconfirmmsg').style.display = 'block'; // Mostra o pop-up
+      document.getElementById('deleteconfirmbutton').addEventListener('click', function () {
+                        document.getElementById('deleteconfirmmsg').style.display = 'none'; // Esconde o pop-up
+                    });
+  </script> 
+  <% } 
+%>
     </main>
 
 

@@ -49,6 +49,7 @@
         PreparedStatement pQueryDone = conn.prepareStatement(pQuery);
         pQueryDone.setInt(1, uid);
         ResultSet usuarios = pQueryDone.executeQuery();
+
         %>
 
 
@@ -180,17 +181,21 @@ if(request.getParameter("error") != null)
   <% } 
 %>
             <form style="margin-top: 20px;" action="updateUsuario" method="POST">
-                <input type="hidden" name="nome" value=<%= usuarios.getString("nome") %>>
+                <h2>Nome</h2>
+            <input class="info2" type="text" name="nome" value="<%= usuarios.getString("nome") %>"> 
+             <h2>Usuario</h2>
+             <input class = "info2" type="text" name="usuario" value="<%= usuarios.getString("usuario") %>">	
                 <h2>Email</h2>
                 <input class="info2" type="email" name="email" value="<%= usuarios.getString("email") %>"> 
             <h2>Senha</h2>
             <input type="hidden" name="usuario" value=<%= usuarios.getString("usuario") %>>
-            <input class="info2" type="password" name="senha1" value="" placeholder="Insira a senha atual..."><br>
-            <input class="info2" type="password" name="senha2" value="" placeholder="Insira a nova senha..."><br>
-            <input class="info2" type="password" name="senha3" value="" placeholder="Confirme a senha..."><br>
+            <input class="info2" type="password" name="senha2"  placeholder="Insira a nova senha..."><br>
+            <input class="info2" type="password" name="senha3"  placeholder="Confirme a senha..."><br>
             <input type="hidden" name="senhadb" value=<%= usuarios.getString("senha") %>>
             <input type="hidden" name="tipo" value=<%= usuarios.getString("tipo") %>>
             <input type="hidden" name="id" value=<%= uid %>>
+            <h2>Para salvar as alteracoes, insira a senha atual</h2>
+            <input class="info2" type="password" name="senha1" value="" placeholder="Senha atual..."><br>
             <button class="btn btn-outline-danger" id="confirmbutton" type="button">Excluir conta</button> 
             <button class="btn btn-outline-success" id="savebutton" type="submit">Salvar</button>   
         </form>
